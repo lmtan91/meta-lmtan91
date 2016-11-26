@@ -8,5 +8,7 @@ SRC_URI[archive.sha256sum] = "b37404aed9a901807fd5553e7b72b4036b4c69530187515168
 SRC_URI = "http://pkgs.fedoraproject.org/repo/pkgs/clutter/clutter-0.8.8.tar.bz2/md5/20f9ab406a9fa261a0a3379eb6f43625/clutter-0.8.8.tar.bz2;name=archive \
 		file://clutter-compilation-error.patch \
 		file://clutter-use-host-alias-libtool-instead.patch  \
+		file://clutter-use-func_show_eval-to-fix-LAI-lib-depedency.patch \
+		file://clutter-missing-math-dependency-on-some-test-apps.patch \
 "
 

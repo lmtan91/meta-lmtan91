@@ -1,0 +1,31 @@
+diff -rupN clutter-0.8.8/tests/Makefile.in /tmp/clutter-0.8.8/tests/Makefile.in
+--- clutter-0.8.8/tests/Makefile.in	2009-02-20 22:58:04.000000000 +0700
++++ /tmp/clutter-0.8.8/tests/Makefile.in	2016-11-26 22:13:30.489475256 +0700
+@@ -71,15 +71,15 @@ CONFIG_CLEAN_FILES =
+ PROGRAMS = $(noinst_PROGRAMS)
+ am_test_actors_OBJECTS = test-actors.$(OBJEXT)
+ test_actors_OBJECTS = $(am_test_actors_OBJECTS)
+-test_actors_LDADD = $(LDADD)
++test_actors_LDADD = $(LDADD) -lm
+ test_actors_DEPENDENCIES = $(top_builddir)/clutter/libclutter-@CLUTTER_FLAVOUR@-@CLUTTER_MAJORMINOR@.la
+ am_test_behave_OBJECTS = test-behave.$(OBJEXT)
+ test_behave_OBJECTS = $(am_test_behave_OBJECTS)
+-test_behave_LDADD = $(LDADD)
++test_behave_LDADD = $(LDADD) -lm
+ test_behave_DEPENDENCIES = $(top_builddir)/clutter/libclutter-@CLUTTER_FLAVOUR@-@CLUTTER_MAJORMINOR@.la
+ test_clip_SOURCES = test-clip.c
+ test_clip_OBJECTS = test-clip.$(OBJEXT)
+-test_clip_LDADD = $(LDADD)
++test_clip_LDADD = $(LDADD) -lm
+ test_clip_DEPENDENCIES = $(top_builddir)/clutter/libclutter-@CLUTTER_FLAVOUR@-@CLUTTER_MAJORMINOR@.la
+ am_test_cogl_offscreen_OBJECTS = test-cogl-offscreen.$(OBJEXT)
+ test_cogl_offscreen_OBJECTS = $(am_test_cogl_offscreen_OBJECTS)
+@@ -175,7 +175,7 @@ test_opacity_LDADD = $(LDADD)
+ test_opacity_DEPENDENCIES = $(top_builddir)/clutter/libclutter-@CLUTTER_FLAVOUR@-@CLUTTER_MAJORMINOR@.la
+ am_test_paint_wrapper_OBJECTS = test-paint-wrapper.$(OBJEXT)
+ test_paint_wrapper_OBJECTS = $(am_test_paint_wrapper_OBJECTS)
+-test_paint_wrapper_LDADD = $(LDADD)
++test_paint_wrapper_LDADD = $(LDADD) -lm
+ test_paint_wrapper_DEPENDENCIES = $(top_builddir)/clutter/libclutter-@CLUTTER_FLAVOUR@-@CLUTTER_MAJORMINOR@.la
+ am_test_perspective_OBJECTS = test-perspective.$(OBJEXT)
+ test_perspective_OBJECTS = $(am_test_perspective_OBJECTS)

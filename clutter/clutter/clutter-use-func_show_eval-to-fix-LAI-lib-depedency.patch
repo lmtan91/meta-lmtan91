@@ -1,0 +1,14 @@
+diff -rupN clutter-0.8.8/ltmain.sh /tmp/clutter-0.8.8/ltmain.sh
+--- clutter-0.8.8/ltmain.sh	2008-04-30 04:33:55.000000000 +0700
++++ /tmp/clutter-0.8.8/ltmain.sh	2016-11-26 21:03:38.336686866 +0700
+@@ -6094,8 +6094,8 @@ relink_command=\"$relink_command\""
+ 	# Install the pseudo-library for information purposes.
+ 	name=`$echo "X$file" | $Xsed -e 's%^.*/%%'`
+ 	instname="$dir/$name"i
+-	$show "$install_prog $instname $destdir/$name"
+-	$run eval "$install_prog $instname $destdir/$name" || exit $?
++	# use func_show_eval instead of the old one
++	func_show_eval "$install_prog $instname $destdir/$name" 'exit $?'
+ 
+ 	# Maybe install the static library, too.
+ 	test -n "$old_library" && staticlibs="$staticlibs $dir/$old_library"
