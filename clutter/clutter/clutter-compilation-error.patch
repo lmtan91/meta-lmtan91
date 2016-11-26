@@ -1,0 +1,334 @@
+diff -rupN clutter-0.8.8/clutter/clutter-actor.c /tmp/clutter-0.8.8/clutter/clutter-actor.c
+--- clutter-0.8.8/clutter/clutter-actor.c	2009-02-20 22:41:39.000000000 +0700
++++ /tmp/clutter-0.8.8/clutter/clutter-actor.c	2016-11-04 23:03:31.530879999 +0700
+@@ -5027,7 +5027,7 @@ clutter_actor_set_name (ClutterActor *se
+  * Return value: the name of the actor, or %NULL. The returned string is
+  *   owned by the actor and should not be modified or freed.
+  */
+-G_CONST_RETURN gchar *
++const gchar *
+ clutter_actor_get_name (ClutterActor *self)
+ {
+   g_return_val_if_fail (CLUTTER_IS_ACTOR (self), NULL);
+diff -rupN clutter-0.8.8/clutter/clutter-actor.h /tmp/clutter-0.8.8/clutter/clutter-actor.h
+--- clutter-0.8.8/clutter/clutter-actor.h	2009-02-20 22:41:39.000000000 +0700
++++ /tmp/clutter-0.8.8/clutter/clutter-actor.h	2016-11-04 23:03:31.690799999 +0700
+@@ -421,7 +421,7 @@ guint8                clutter_actor_get_
+ 
+ void                  clutter_actor_set_name                  (ClutterActor          *self,
+                                                                const gchar           *name);
+-G_CONST_RETURN gchar *clutter_actor_get_name                  (ClutterActor          *self);
++const gchar *clutter_actor_get_name                  (ClutterActor          *self);
+ 
+ guint32               clutter_actor_get_gid                   (ClutterActor          *self);
+ void                  clutter_actor_set_clip                  (ClutterActor          *self,
+diff -rupN clutter-0.8.8/clutter/clutter-entry.c /tmp/clutter-0.8.8/clutter/clutter-entry.c
+--- clutter-0.8.8/clutter/clutter-entry.c	2009-02-20 22:41:39.000000000 +0700
++++ /tmp/clutter-0.8.8/clutter/clutter-entry.c	2016-11-04 23:03:31.350970000 +0700
+@@ -1011,7 +1011,7 @@ clutter_entry_new (void)
+  *
+  * Since: 0.4
+  */
+-G_CONST_RETURN gchar *
++const gchar *
+ clutter_entry_get_text (ClutterEntry *entry)
+ {
+   g_return_val_if_fail (CLUTTER_IS_ENTRY (entry), NULL);
+@@ -1102,7 +1102,7 @@ clutter_entry_set_text (ClutterEntry *en
+  *
+  * Since: 0.4
+  */
+-G_CONST_RETURN gchar *
++const gchar *
+ clutter_entry_get_font_name (ClutterEntry *entry)
+ {
+   g_return_val_if_fail (CLUTTER_IS_ENTRY (entry), NULL);
+diff -rupN clutter-0.8.8/clutter/clutter-entry.h /tmp/clutter-0.8.8/clutter/clutter-entry.h
+--- clutter-0.8.8/clutter/clutter-entry.h	2009-02-20 22:41:39.000000000 +0700
++++ /tmp/clutter-0.8.8/clutter/clutter-entry.h	2016-11-04 23:03:31.326981999 +0700
+@@ -114,10 +114,10 @@ ClutterActor *        clutter_entry_new_
+                                                          const gchar        *text);
+ void                  clutter_entry_set_text            (ClutterEntry       *entry,
+ 						         const gchar        *text);
+-G_CONST_RETURN gchar *clutter_entry_get_text            (ClutterEntry       *entry);
++const gchar *clutter_entry_get_text            (ClutterEntry       *entry);
+ void                  clutter_entry_set_font_name       (ClutterEntry       *entry,
+ 						         const gchar        *font_name);
+-G_CONST_RETURN gchar *clutter_entry_get_font_name       (ClutterEntry       *entry);
++const gchar *clutter_entry_get_font_name       (ClutterEntry       *entry);
+ void                  clutter_entry_set_color           (ClutterEntry       *entry,
+ 						         const ClutterColor *color);
+ void                  clutter_entry_get_color           (ClutterEntry       *entry,
+diff -rupN clutter-0.8.8/clutter/clutter-label.c /tmp/clutter-0.8.8/clutter/clutter-label.c
+--- clutter-0.8.8/clutter/clutter-label.c	2009-02-20 22:41:39.000000000 +0700
++++ /tmp/clutter-0.8.8/clutter/clutter-label.c	2016-11-04 23:03:31.155067999 +0700
+@@ -722,7 +722,7 @@ clutter_label_new (void)
+  * Return value: the text of the label.  The returned string is
+  * owned by #ClutterLabel and should not be modified or freed.
+  */
+-G_CONST_RETURN gchar *
++const gchar *
+ clutter_label_get_text (ClutterLabel *label)
+ {
+   g_return_val_if_fail (CLUTTER_IS_LABEL (label), NULL);
+@@ -769,7 +769,7 @@ clutter_label_set_text (ClutterLabel *la
+  *   string is owned by @label and should not be modified
+  *   or freed.
+  */
+-G_CONST_RETURN gchar *
++const gchar *
+ clutter_label_get_font_name (ClutterLabel *label)
+ {
+   g_return_val_if_fail (CLUTTER_IS_LABEL (label), NULL);
+diff -rupN clutter-0.8.8/clutter/clutter-label.h /tmp/clutter-0.8.8/clutter/clutter-label.h
+--- clutter-0.8.8/clutter/clutter-label.h	2009-02-20 22:41:39.000000000 +0700
++++ /tmp/clutter-0.8.8/clutter/clutter-label.h	2016-11-04 23:03:31.362964000 +0700
+@@ -90,10 +90,10 @@ ClutterActor *        clutter_label_new_
+                                                         const gchar        *text);
+ void                  clutter_label_set_text           (ClutterLabel       *label,
+ 						        const gchar        *text);
+-G_CONST_RETURN gchar *clutter_label_get_text           (ClutterLabel       *label);
++const gchar *clutter_label_get_text           (ClutterLabel       *label);
+ void                  clutter_label_set_font_name      (ClutterLabel       *label,
+ 						        const gchar        *font_name);
+-G_CONST_RETURN gchar *clutter_label_get_font_name      (ClutterLabel       *label);
++const gchar *clutter_label_get_font_name      (ClutterLabel       *label);
+ void                  clutter_label_set_color          (ClutterLabel       *label,
+ 						        const ClutterColor *color);
+ void                  clutter_label_get_color          (ClutterLabel       *label,
+diff -rupN clutter-0.8.8/clutter/clutter-main.c /tmp/clutter-0.8.8/clutter/clutter-main.c
+--- clutter-0.8.8/clutter/clutter-main.c	2009-02-20 22:41:39.000000000 +0700
++++ /tmp/clutter-0.8.8/clutter/clutter-main.c	2016-11-04 23:03:31.458916000 +0700
+@@ -525,7 +525,7 @@ clutter_threads_impl_unlock (void)
+ void
+ clutter_threads_init (void)
+ {
+-  if (!g_thread_supported ())
++//  if (!g_thread_supported ())
+     g_error ("g_thread_init() must be called before clutter_threads_init()");
+ 
+   clutter_threads_mutex = g_mutex_new ();
+diff -rupN clutter-0.8.8/clutter/clutter-model.c /tmp/clutter-0.8.8/clutter/clutter-model.c
+--- clutter-0.8.8/clutter/clutter-model.c	2009-02-20 22:41:39.000000000 +0700
++++ /tmp/clutter-0.8.8/clutter/clutter-model.c	2016-11-04 23:03:31.155067999 +0700
+@@ -1053,7 +1053,7 @@ clutter_model_remove (ClutterModel *mode
+  *
+  * Since: 0.6
+  */
+-G_CONST_RETURN gchar *
++const gchar *
+ clutter_model_get_column_name (ClutterModel *model,
+                                guint         column)
+ {
+diff -rupN clutter-0.8.8/clutter/clutter-model.h /tmp/clutter-0.8.8/clutter/clutter-model.h
+--- clutter-0.8.8/clutter/clutter-model.h	2009-02-20 22:41:39.000000000 +0700
++++ /tmp/clutter-0.8.8/clutter/clutter-model.h	2016-11-04 23:03:31.107091999 +0700
+@@ -221,7 +221,7 @@ void                  clutter_model_remo
+ 
+ guint                 clutter_model_get_n_rows         (ClutterModel     *model);
+ guint                 clutter_model_get_n_columns      (ClutterModel     *model);
+-G_CONST_RETURN gchar *clutter_model_get_column_name    (ClutterModel     *model,
++const gchar *clutter_model_get_column_name    (ClutterModel     *model,
+                                                         guint             column);
+ GType                 clutter_model_get_column_type    (ClutterModel     *model,
+                                                         guint             column);
+diff -rupN clutter-0.8.8/clutter/clutter-scriptable.c /tmp/clutter-0.8.8/clutter/clutter-scriptable.c
+--- clutter-0.8.8/clutter/clutter-scriptable.c	2008-12-11 05:44:39.000000000 +0700
++++ /tmp/clutter-0.8.8/clutter/clutter-scriptable.c	2016-11-04 23:03:31.862713999 +0700
+@@ -109,7 +109,7 @@ clutter_scriptable_set_id (ClutterScript
+  *
+  * Since: 0.6
+  */
+-G_CONST_RETURN gchar *
++const gchar *
+ clutter_scriptable_get_id (ClutterScriptable *scriptable)
+ {
+   ClutterScriptableIface *iface;
+diff -rupN clutter-0.8.8/clutter/clutter-scriptable.h /tmp/clutter-0.8.8/clutter/clutter-scriptable.h
+--- clutter-0.8.8/clutter/clutter-scriptable.h	2009-02-20 22:41:39.000000000 +0700
++++ /tmp/clutter-0.8.8/clutter/clutter-scriptable.h	2016-11-04 23:03:30.583354000 +0700
+@@ -80,7 +80,7 @@ GType                 clutter_scriptable
+ 
+ void                  clutter_scriptable_set_id              (ClutterScriptable *scriptable,
+                                                               const gchar       *id);
+-G_CONST_RETURN gchar *clutter_scriptable_get_id              (ClutterScriptable *scriptable);
++const gchar *clutter_scriptable_get_id              (ClutterScriptable *scriptable);
+ gboolean              clutter_scriptable_parse_custom_node   (ClutterScriptable *scriptable,
+                                                               ClutterScript     *script,
+                                                               GValue            *value,
+diff -rupN clutter-0.8.8/clutter/clutter-script.c /tmp/clutter-0.8.8/clutter/clutter-script.c
+--- clutter-0.8.8/clutter/clutter-script.c	2009-02-20 22:41:39.000000000 +0700
++++ /tmp/clutter-0.8.8/clutter/clutter-script.c	2016-11-04 23:03:31.510889999 +0700
+@@ -2100,7 +2100,7 @@ clutter_script_get_type_from_name (Clutt
+  *
+  * Since: 0.6
+  */
+-G_CONST_RETURN gchar *
++const gchar *
+ clutter_get_script_id (GObject *gobject)
+ {
+   g_return_val_if_fail (G_IS_OBJECT (gobject), NULL);
+diff -rupN clutter-0.8.8/clutter/clutter-script.h /tmp/clutter-0.8.8/clutter/clutter-script.h
+--- clutter-0.8.8/clutter/clutter-script.h	2009-02-20 22:41:39.000000000 +0700
++++ /tmp/clutter-0.8.8/clutter/clutter-script.h	2016-11-04 23:03:30.547371999 +0700
+@@ -140,7 +140,7 @@ void           clutter_script_ensure_obj
+ GType          clutter_script_get_type_from_name   (ClutterScript  *script,
+                                                     const gchar    *type_name);
+ 
+-G_CONST_RETURN gchar *clutter_get_script_id        (GObject        *gobject);
++const gchar *clutter_get_script_id        (GObject        *gobject);
+ 
+ void           clutter_script_connect_signals      (ClutterScript  *script,
+                                                     gpointer        user_data);
+diff -rupN clutter-0.8.8/clutter/clutter-shader.c /tmp/clutter-0.8.8/clutter/clutter-shader.c
+--- clutter-0.8.8/clutter/clutter-shader.c	2009-02-20 22:41:39.000000000 +0700
++++ /tmp/clutter-0.8.8/clutter/clutter-shader.c	2016-11-04 23:03:31.306991999 +0700
+@@ -95,7 +95,7 @@ enum
+ 
+ G_DEFINE_TYPE (ClutterShader, clutter_shader, G_TYPE_OBJECT);
+ 
+-G_CONST_RETURN gchar *clutter_shader_get_source (ClutterShader      *shader,
++const gchar *clutter_shader_get_source (ClutterShader      *shader,
+                                                  ClutterShaderType   type);
+ 
+ static void
+@@ -704,7 +704,7 @@ _clutter_shader_release_all (void)
+  *
+  * Since: 0.6
+  */
+-G_CONST_RETURN gchar *
++const gchar *
+ clutter_shader_get_fragment_source (ClutterShader *shader)
+ {
+   g_return_val_if_fail (CLUTTER_IS_SHADER (shader), NULL);
+@@ -723,7 +723,7 @@ clutter_shader_get_fragment_source (Clut
+  *
+  * Since: 0.6
+  */
+-G_CONST_RETURN gchar *
++const gchar *
+ clutter_shader_get_vertex_source (ClutterShader *shader)
+ {
+   g_return_val_if_fail (CLUTTER_IS_SHADER (shader), NULL);
+diff -rupN clutter-0.8.8/clutter/clutter-shader.h /tmp/clutter-0.8.8/clutter/clutter-shader.h
+--- clutter-0.8.8/clutter/clutter-shader.h	2009-02-20 22:41:39.000000000 +0700
++++ /tmp/clutter-0.8.8/clutter/clutter-shader.h	2016-11-04 23:03:31.726781999 +0700
+@@ -95,8 +95,8 @@ void                  clutter_shader_set
+                                                           const gchar        *data,
+                                                           gssize              length);
+ 
+-G_CONST_RETURN gchar *clutter_shader_get_vertex_source   (ClutterShader      *shader);
+-G_CONST_RETURN gchar *clutter_shader_get_fragment_source (ClutterShader      *shader);
++const gchar *clutter_shader_get_vertex_source   (ClutterShader      *shader);
++const gchar *clutter_shader_get_fragment_source (ClutterShader      *shader);
+ 
+ void                  clutter_shader_set_uniform_1f      (ClutterShader      *shader,
+                                                           const gchar        *name,
+diff -rupN clutter-0.8.8/clutter/clutter-stage.c /tmp/clutter-0.8.8/clutter/clutter-stage.c
+--- clutter-0.8.8/clutter/clutter-stage.c	2009-02-20 22:41:39.000000000 +0700
++++ /tmp/clutter-0.8.8/clutter/clutter-stage.c	2016-11-04 23:03:31.410939999 +0700
+@@ -1365,7 +1365,7 @@ clutter_stage_set_title (ClutterStage
+  *
+  * Since: 0.4
+  **/
+-G_CONST_RETURN gchar *
++const gchar *
+ clutter_stage_get_title (ClutterStage       *stage)
+ {
+   g_return_val_if_fail (CLUTTER_IS_STAGE (stage), NULL);
+diff -rupN clutter-0.8.8/clutter/clutter-stage.h /tmp/clutter-0.8.8/clutter/clutter-stage.h
+--- clutter-0.8.8/clutter/clutter-stage.h	2009-02-20 22:41:39.000000000 +0700
++++ /tmp/clutter-0.8.8/clutter/clutter-stage.h	2016-11-04 23:03:30.699296000 +0700
+@@ -201,7 +201,7 @@ gboolean      clutter_stage_event
+ 
+ void                  clutter_stage_set_title          (ClutterStage *stage,
+                                                         const gchar  *title);
+-G_CONST_RETURN gchar *clutter_stage_get_title          (ClutterStage *stage);
++const gchar *clutter_stage_get_title          (ClutterStage *stage);
+ void                  clutter_stage_set_user_resizable (ClutterStage *stage,
+ 						        gboolean      resizable);
+ gboolean              clutter_stage_get_user_resizable (ClutterStage *stage);
+diff -rupN clutter-0.8.8/clutter/cogl/gles/cogl-gles2-wrapper.c /tmp/clutter-0.8.8/clutter/cogl/gles/cogl-gles2-wrapper.c
+--- clutter-0.8.8/clutter/cogl/gles/cogl-gles2-wrapper.c	2009-02-20 22:41:39.000000000 +0700
++++ /tmp/clutter-0.8.8/clutter/cogl/gles/cogl-gles2-wrapper.c	2016-11-04 23:03:31.990649999 +0700
+@@ -507,7 +507,7 @@ cogl_gles2_wrapper_update_matrix (CoglGl
+ }
+ 
+ void
+-cogl_wrap_glClearColorx (GLclampx r, GLclampx g, GLclampx b, GLclampx a)
++cogl_wrap_glClearColorx (int r, int g, int b, int a)
+ {
+   glClearColor (CLUTTER_FIXED_TO_FLOAT (r),
+ 		CLUTTER_FIXED_TO_FLOAT (g),
+@@ -1049,7 +1049,7 @@ cogl_wrap_glAlphaFunc (GLenum func, GLcl
+ }
+ 
+ void
+-cogl_wrap_glColor4x (GLclampx r, GLclampx g, GLclampx b, GLclampx a)
++cogl_wrap_glColor4x (int r, int g, int b, int a)
+ {
+   glVertexAttrib4f (COGL_GLES2_WRAPPER_COLOR_ATTRIB,
+ 		    CLUTTER_FIXED_TO_FLOAT (r),
+diff -rupN clutter-0.8.8/clutter/cogl/gles/cogl-gles2-wrapper.h /tmp/clutter-0.8.8/clutter/cogl/gles/cogl-gles2-wrapper.h
+--- clutter-0.8.8/clutter/cogl/gles/cogl-gles2-wrapper.h	2009-02-20 22:41:39.000000000 +0700
++++ /tmp/clutter-0.8.8/clutter/cogl/gles/cogl-gles2-wrapper.h	2016-11-04 23:03:32.002643999 +0700
+@@ -200,7 +200,7 @@ struct _CoglGles2WrapperShader
+ void cogl_gles2_wrapper_init (CoglGles2Wrapper *wrapper);
+ void cogl_gles2_wrapper_deinit (CoglGles2Wrapper *wrapper);
+ 
+-void cogl_wrap_glClearColorx (GLclampx r, GLclampx g, GLclampx b, GLclampx a);
++void cogl_wrap_glClearColorx (int r, int g, int b, int a);
+ 
+ void cogl_wrap_glPushMatrix ();
+ void cogl_wrap_glPopMatrix ();
+@@ -234,7 +234,7 @@ void cogl_wrap_glDisableClientState (GLe
+ 
+ void cogl_wrap_glAlphaFunc (GLenum func, GLclampf ref);
+ 
+-void cogl_wrap_glColor4x (GLclampx r, GLclampx g, GLclampx b, GLclampx a);
++void cogl_wrap_glColor4x (int r, int g, int b, int a);
+ 
+ void cogl_wrap_glClipPlanex (GLenum plane, GLfixed *equation);
+ 
+diff -rupN clutter-0.8.8/clutter/json/json-node.c /tmp/clutter-0.8.8/clutter/json/json-node.c
+--- clutter-0.8.8/clutter/json/json-node.c	2009-02-20 22:41:39.000000000 +0700
++++ /tmp/clutter-0.8.8/clutter/json/json-node.c	2016-11-04 23:03:31.670809999 +0700
+@@ -362,7 +362,7 @@ json_node_free (JsonNode *node)
+  * Return value: a string containing the name of the type. The returned string
+  *   is owned by the node and should never be modified or freed
+  */
+-G_CONST_RETURN gchar *
++const gchar *
+ json_node_type_name (JsonNode *node)
+ {
+   g_return_val_if_fail (node != NULL, "(null)");
+@@ -439,7 +439,7 @@ json_node_set_string (JsonNode    *node,
+  *
+  * Return value: a string value.
+  */
+-G_CONST_RETURN gchar *
++const gchar *
+ json_node_get_string (JsonNode *node)
+ {
+   g_return_val_if_fail (node != NULL, NULL);
+diff -rupN clutter-0.8.8/clutter/json/json-types.h /tmp/clutter-0.8.8/clutter/json/json-types.h
+--- clutter-0.8.8/clutter/json/json-types.h	2008-12-11 05:44:39.000000000 +0700
++++ /tmp/clutter-0.8.8/clutter/json/json-types.h	2016-11-04 23:03:31.670809999 +0700
+@@ -115,7 +115,7 @@ void                  json_node_get_valu
+                                                  GValue       *value);
+ void                  json_node_set_string      (JsonNode     *node,
+                                                  const gchar  *value);
+-G_CONST_RETURN gchar *json_node_get_string      (JsonNode     *node);
++const gchar *json_node_get_string      (JsonNode     *node);
+ gchar *               json_node_dup_string      (JsonNode     *node);
+ void                  json_node_set_int         (JsonNode     *node,
+                                                  gint          value);
+@@ -127,7 +127,7 @@ void                  json_node_set_bool
+                                                  gboolean      value);
+ gboolean              json_node_get_boolean     (JsonNode     *node);
+ JsonNode *            json_node_get_parent      (JsonNode     *node);
+-G_CONST_RETURN gchar *json_node_type_name       (JsonNode     *node);
++const gchar *json_node_type_name       (JsonNode     *node);
+ 
+ GType                 json_object_get_type      (void) G_GNUC_CONST;
+ JsonObject *          json_object_new           (void);

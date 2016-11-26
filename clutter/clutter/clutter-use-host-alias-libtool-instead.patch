@@ -1,0 +1,54 @@
+diff -rupN clutter-0.8.8/aclocal.m4 /tmp/clutter-0.8.8/aclocal.m4
+--- clutter-0.8.8/aclocal.m4	2009-02-20 22:57:54.000000000 +0700
++++ /tmp/clutter-0.8.8/aclocal.m4	2016-11-17 20:55:50.101072917 +0700
+@@ -554,7 +554,7 @@ AC_BEFORE([$0],[AC_LIBTOOL_GCJ])dnl
+ LIBTOOL_DEPS="$ac_aux_dir/ltmain.sh"
+ 
+ # Always use our own libtool.
+-LIBTOOL='$(SHELL) $(top_builddir)/libtool'
++LIBTOOL='$(SHELL) $(top_builddir)/${host_alias}-libtool'
+ AC_SUBST(LIBTOOL)dnl
+ 
+ # Prevent multiple expansion
+@@ -620,7 +620,7 @@ no_glob_subst='s/\*/\\\*/g'
+ rm="rm -f"
+ 
+ # Global variables:
+-default_ofile=libtool
++default_ofile=${host_alias}-libtool
+ can_build_shared=yes
+ 
+ # All known linkers require a `.a' archive for static linking (except MSVC,
+diff -rupN clutter-0.8.8/configure /tmp/clutter-0.8.8/configure
+--- clutter-0.8.8/configure	2009-02-20 22:58:01.000000000 +0700
++++ /tmp/clutter-0.8.8/configure	2016-11-17 20:55:16.629072917 +0700
+@@ -6635,7 +6635,7 @@ no_glob_subst='s/\*/\\\*/g'
+ rm="rm -f"
+ 
+ # Global variables:
+-default_ofile=libtool
++default_ofile=${host_alias}-libtool
+ can_build_shared=yes
+ 
+ # All known linkers require a `.a' archive for static linking (except MSVC,
+@@ -19882,7 +19882,7 @@ fi
+ LIBTOOL_DEPS="$ac_aux_dir/ltmain.sh"
+ 
+ # Always use our own libtool.
+-LIBTOOL='$(SHELL) $(top_builddir)/libtool'
++LIBTOOL='$(SHELL) $(top_builddir)/${host_alias}-libtool'
+ 
+ # Prevent multiple expansion
+ 
+diff -rupN clutter-0.8.8/configure.ac /tmp/clutter-0.8.8/configure.ac
+--- clutter-0.8.8/configure.ac	2009-02-20 22:57:24.000000000 +0700
++++ /tmp/clutter-0.8.8/configure.ac	2016-11-17 20:56:11.701072917 +0700
+@@ -75,7 +75,7 @@ AC_CHECK_HEADERS([fcntl.h stdlib.h strin
+ AC_C_CONST
+ 
+ # Checks for library functions.
+-AC_FUNC_MALLOC
++# AC_FUNC_MALLOC
+ AC_FUNC_MMAP
+ AC_CHECK_FUNCS([memset munmap strcasecmp strdup])
+ 
