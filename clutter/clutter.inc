@@ -2,13 +2,15 @@ SUMMARY = "Graphics library for creating hardware-accelerated user interfaces"
 HOMEPAGE = "http://www.clutter-project.org/"
 LICENSE = "LGPLv2.1+"
 
-inherit clutter
+inherit clutter 
 
 DEPENDS = "pango glib-2.0 json-glib atk udev cogl-1.0 "
-PACKAGE_BEFORE_PN += "${PN}-examples"
-AUTOTOOLS_AUXDIR = "${S}/build"
+# PACKAGE_BEFORE_PN += "${PN}-examples"
+# AUTOTOOLS_AUXDIR = "${S}/build"
+PACKAGES = "${PN}" 
 
-EDEPENDS_X11 = "virtual/libx11 libxi libxfixes"
+# EDEPENDS_X11 = "virtual/libx11 libxi libxfixes"
+EDEPENDS_X11 = "virtual/libx11 libxi "
 EDEPENDS_GLX = "virtual/libgl"
 EDEPENDS_EGL = "virtual/egl"
 EDEPENDS_WAYLAND = "wayland libxkbcommon gdk-pixbuf"
@@ -17,33 +19,17 @@ EDEPENDS_EVDEV = "libxkbcommon"
 ERDEPENDS_EVDEV = "xkeyboard-config"
 
 # Disable pretty much everything, override in platform specific set up
-#EXTRA_OECONF += "\
-#		 --with-gles=1.1		\
-#		 --with-flavour=eglnative	\
-#		 --with-imagebackend=internal	\
-#		 --with-x=no			\
-#		 --host=arm-poky-linux-gnueabi \
-#		PKG_CONFIG="${STAGING_DIR_NATIVE}/usr/bin/pkg-config" \
-#	    	"
-#do_configure_prepend() {
-#	sed -i 's/default_ofile=libtool/default_ofile=${host_alias}-libtool/g' configure
-#}
 
-#export ac_cv_func_malloc_0_nonnull="yes"
-# --build=x86_64-linux
-#			--with-libtool-sysroot="${STAGING_DIR_HOST}" 
-#			PKG_CONFIG="${STAGING_DIR_NATIVE}/usr/bin/pkg-config" 
-#			PKG_CONFIG_PATH="${STAGING_LIBDIR}/pkgconfig" 
-#			CFLAGS="--sysroot=${STAGING_DIR_HOST} -L${STAGING_LIBDIR}" 
 do_configure() {
-	echo "${STAGING_DIR_HOST}"
-#	sed -i 's/default_ofile=libtool/default_ofile=${host_alias}-libtool/g' configure
-#	sed -i 's/$(SHELL) $(top_builddir)\/libtool/$(SHELL) $(top_builddir)\/${host_alias}-libtool/g' configure
-	./configure --with-flavour=eglnative \
+	./configure --prefix=/usr --with-flavour=eglnative \
 			--host=arm-poky-linux-gnueabi \
 			--with-gles=2.0	\
 			--with-x=no	\
 			--with-imagebackend=internal \
+}
+
+do_install_append() {
+	chrpath -d ${D}${libdir}/libclutter-eglnative-0.8.so.0.808.0
 }
 
 PACKAGECONFIG[x11] = "--enable-x11-backend,--disable-x11-backend,${EDEPENDS_X11}"
@@ -54,15 +40,35 @@ PACKAGECONFIG[wayland] = "--enable-wayland-backend,--disable-wayland-backend,${E
 PACKAGECONFIG[wayland-compositor] = "--enable-wayland-compositor,--disable-wayland-compositor,wayland"
 
 # Default configuration, distros might want to override
-PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)} \
-                   ${@base_contains('DISTRO_FEATURES', 'x11', 'glx x11', '', d)}"
+# PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)} \
+#                   ${@base_contains('DISTRO_FEATURES', 'x11', 'glx x11', '', d)}"
 
-FILES_${PN}-dbg += "${libdir}/clutter/examples/.debug"
-FILES_${PN}-examples = "${libdir}/clutter/examples"
 
 INSANE_SKIP_${PN} = "installed-vs-shipped "
+# INSANE_SKIP_${PN} = "dev-so"
+# ALLOW_EMPTY_${PN} = "1"
+#FILES_${PN} = "${libdir}/pkgconfig \
+#		${libdir}/pkgconfig/clutter-0.8.pc \
+#		${libdir}/pkgconfig/clutter-eglnative-0.8.pc \
+#		${libdir}/libclutter-eglnative-0.8.so \
+#		${libdir}/libclutter-eglnative-0.8.so.0 \
+#		${libdir}/libclutter-eglnative-0.8.so.0.808.0 \
+#"
+#FILES_${PN}-dev = "${libdir}/pkgconfig \
+#               ${libdir}/pkgconfig/clutter-0.8.pc \
+#                ${libdir}/pkgconfig/clutter-eglnative-0.8.pc \
+#                ${libdir}/libclutter-eglnative-0.8.so \
+#                ${libdir}/libclutter-eglnative-0.8.so.0 \
+#                ${libdir}/libclutter-eglnative-0.8.so.0.808.0 \
+#"
 
-#do_configure_prepend() {
-#	# see https://bugzilla.gnome.org/show_bug.cgi?id=661128 for this
-#	touch -t 200001010000 ${S}/po/clutter-1.0.pot
-#}
+FILES_${PN} = "${libdir}/lib*.so.* \
+		${includedir}/*/*/*.h \
+"		 
+#		${libdir}/libclutter-eglnative-0.8.so.0.808.0 
+#"
+FILES_${PN}-dev = "${includedir}/*" 
+#			${libdir}/libclutter-eglnative-0.8.so.0.808.0 
+#"
+FILES_${PN}-dbg += "${libdir}/.debug"
+
