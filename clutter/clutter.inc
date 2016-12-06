@@ -40,7 +40,7 @@ PACKAGECONFIG[wayland] = "--enable-wayland-backend,--disable-wayland-backend,${E
 PACKAGECONFIG[wayland-compositor] = "--enable-wayland-compositor,--disable-wayland-compositor,wayland"
 
 
-INSANE_SKIP_${PN} = "installed-vs-shipped "
+INSANE_SKIP_${PN} = "installed-vs-shipped dev-so"
 
 FILES_${PN} = "${libdir}/lib*.so.* \
 		${includedir}/*/*/*.h \
