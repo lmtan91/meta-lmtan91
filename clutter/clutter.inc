@@ -39,36 +39,11 @@ PACKAGECONFIG[evdev] = "--enable-evdev-input,--disable-evdev-input,${EDEPENDS_EV
 PACKAGECONFIG[wayland] = "--enable-wayland-backend,--disable-wayland-backend,${EDEPENDS_WAYLAND}"
 PACKAGECONFIG[wayland-compositor] = "--enable-wayland-compositor,--disable-wayland-compositor,wayland"
 
-# Default configuration, distros might want to override
-# PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)} \
-#                   ${@base_contains('DISTRO_FEATURES', 'x11', 'glx x11', '', d)}"
-
 
 INSANE_SKIP_${PN} = "installed-vs-shipped "
-# INSANE_SKIP_${PN} = "dev-so"
-# ALLOW_EMPTY_${PN} = "1"
-#FILES_${PN} = "${libdir}/pkgconfig \
-#		${libdir}/pkgconfig/clutter-0.8.pc \
-#		${libdir}/pkgconfig/clutter-eglnative-0.8.pc \
-#		${libdir}/libclutter-eglnative-0.8.so \
-#		${libdir}/libclutter-eglnative-0.8.so.0 \
-#		${libdir}/libclutter-eglnative-0.8.so.0.808.0 \
-#"
-#FILES_${PN}-dev = "${libdir}/pkgconfig \
-#               ${libdir}/pkgconfig/clutter-0.8.pc \
-#                ${libdir}/pkgconfig/clutter-eglnative-0.8.pc \
-#                ${libdir}/libclutter-eglnative-0.8.so \
-#                ${libdir}/libclutter-eglnative-0.8.so.0 \
-#                ${libdir}/libclutter-eglnative-0.8.so.0.808.0 \
-#"
 
 FILES_${PN} = "${libdir}/lib*.so.* \
 		${includedir}/*/*/*.h \
 "		 
-#		${libdir}/libclutter-eglnative-0.8.so.0.808.0 
-#"
-FILES_${PN}-dev = "${includedir}/*" 
-#			${libdir}/libclutter-eglnative-0.8.so.0.808.0 
-#"
 FILES_${PN}-dbg += "${libdir}/.debug"
 
