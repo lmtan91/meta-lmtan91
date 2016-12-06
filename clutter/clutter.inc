@@ -42,7 +42,7 @@ PACKAGECONFIG[wayland-compositor] = "--enable-wayland-compositor,--disable-wayla
 
 INSANE_SKIP_${PN} = "installed-vs-shipped dev-so"
 
-FILES_${PN} = "${libdir}/lib*.so.* \
+FILES_${PN} = "${libdir}/lib*.so* \
 		${includedir}/*/*/*.h \
 "		 
 FILES_${PN}-dbg += "${libdir}/.debug"
