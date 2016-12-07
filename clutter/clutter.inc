@@ -23,6 +23,7 @@ ERDEPENDS_EVDEV = "xkeyboard-config"
 do_configure() {
 	./configure --prefix=/usr --with-flavour=eglnative \
 			--host=arm-poky-linux-gnueabi \
+			--with-json=internal \
 			--with-gles=2.0	\
 			--with-x=no	\
 			--with-imagebackend=internal \
@@ -44,6 +45,7 @@ INSANE_SKIP_${PN} = "installed-vs-shipped dev-so"
 
 FILES_${PN} = "${libdir}/lib*.so* \
 		${includedir}/*/*/*.h \
+		${includedir}/*/*/*/*.h \
 "		 
 FILES_${PN}-dbg += "${libdir}/.debug"
 
