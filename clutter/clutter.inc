@@ -2,15 +2,13 @@ SUMMARY = "Graphics library for creating hardware-accelerated user interfaces"
 HOMEPAGE = "http://www.clutter-project.org/"
 LICENSE = "LGPLv2.1+"
 
-inherit clutter 
+inherit clutter
 
-DEPENDS = "pango glib-2.0 json-glib atk udev cogl-1.0 "
-# PACKAGE_BEFORE_PN += "${PN}-examples"
-# AUTOTOOLS_AUXDIR = "${S}/build"
-PACKAGES = "${PN}" 
+DEPENDS = "pango glib-2.0 json-glib atk udev cogl-1.0"
+PACKAGE_BEFORE_PN += "${PN}-examples"
+AUTOTOOLS_AUXDIR = "${S}/build"
 
-# EDEPENDS_X11 = "virtual/libx11 libxi libxfixes"
-EDEPENDS_X11 = "virtual/libx11 libxi "
+EDEPENDS_X11 = "virtual/libx11 libxi libxfixes"
 EDEPENDS_GLX = "virtual/libgl"
 EDEPENDS_EGL = "virtual/egl"
 EDEPENDS_WAYLAND = "wayland libxkbcommon gdk-pixbuf"
@@ -19,18 +17,23 @@ EDEPENDS_EVDEV = "libxkbcommon"
 ERDEPENDS_EVDEV = "xkeyboard-config"
 
 # Disable pretty much everything, override in platform specific set up
-
+#EXTRA_OECONF += "--disable-introspection	\
+#	     	 --disable-quartz-backend	\
+#	     	 --disable-win32-backend	\
+#	     	 --disable-gdk-backend		\
+#	     	 --disable-cex100-backend	\
+#	     	 --disable-tslib-input		\
+#	    	"
 do_configure() {
 	./configure --prefix=/usr --with-flavour=eglnative \
 			--host=arm-poky-linux-gnueabi \
-			--with-json=internal \
 			--with-gles=2.0	\
 			--with-x=no	\
 			--with-imagebackend=internal \
 }
 
 do_install_append() {
-	chrpath -d ${D}${libdir}/libclutter-eglnative-0.8.so.0.808.0
+        chrpath -d ${D}${libdir}/libclutter-eglnative-0.8.so.0.808.0
 }
 
 PACKAGECONFIG[x11] = "--enable-x11-backend,--disable-x11-backend,${EDEPENDS_X11}"
@@ -40,12 +43,14 @@ PACKAGECONFIG[evdev] = "--enable-evdev-input,--disable-evdev-input,${EDEPENDS_EV
 PACKAGECONFIG[wayland] = "--enable-wayland-backend,--disable-wayland-backend,${EDEPENDS_WAYLAND}"
 PACKAGECONFIG[wayland-compositor] = "--enable-wayland-compositor,--disable-wayland-compositor,wayland"
 
+# Default configuration, distros might want to override
+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)} \
+                   ${@base_contains('DISTRO_FEATURES', 'x11', 'glx x11', '', d)}"
 
-INSANE_SKIP_${PN} = "installed-vs-shipped dev-so"
+FILES_${PN}-dbg += "${libdir}/clutter/examples/.debug"
+FILES_${PN}-examples = "${libdir}/clutter/examples"
 
-FILES_${PN} = "${libdir}/lib*.so* \
-		${includedir}/*/*/*.h \
-		${includedir}/*/*/*/*.h \
-"		 
-FILES_${PN}-dbg += "${libdir}/.debug"
-
+do_configure_prepend() {
+	# see https://bugzilla.gnome.org/show_bug.cgi?id=661128 for this
+	touch -t 200001010000 ${S}/po/clutter-1.0.pot
+}
