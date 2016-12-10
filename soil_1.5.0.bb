@@ -21,7 +21,7 @@ do_compile() {
 }
 
 do_install() {
-	oe_runmake 'DESTDIR=${D}' install
+	oe_runmake -C soil-src 'DESTDIR=${D}' install
 }
 
 BBCLASSEXTEND = "cross crosssdk nativesdk"
